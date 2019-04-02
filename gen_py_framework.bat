@@ -1,0 +1,1 @@
+python -m PyQt5.uic.pyuic -x text2keystroke_framework.ui -o text2keystroke_framework.py
