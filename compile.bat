@@ -1,5 +1,5 @@
 SET appName=text2keystroke_gui
-pyinstaller .\%appName%.py  --hidden-import PyQt5.sip
+pyinstaller .\%appName%.py --windowed --hidden-import PyQt5.sip 
 rem move dist\%appName%.exe %cd%
 
 rem del /s /f /q  text2keystroke.spec
