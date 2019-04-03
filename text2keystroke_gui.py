@@ -13,6 +13,7 @@ import config
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_text2keystroke(object):
     def setupUi(self, text2keystroke_gui):
         text2keystroke_gui.setObjectName("text2keystroke")
@@ -64,7 +65,8 @@ class Ui_text2keystroke(object):
         self.wipeButton.setGeometry(QtCore.QRect(520, 190, 31, 31))
         self.wipeButton.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("src/wipe.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("src/wipe.svg"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.wipeButton.setIcon(icon)
         self.wipeButton.setObjectName("wipeButton")
         self.tabWidget.addTab(self.TextModeTab, "")
@@ -81,34 +83,40 @@ class Ui_text2keystroke(object):
 
     def retranslateUi(self, text2keystroke_gui):
         _translate = QtCore.QCoreApplication.translate
-        text2keystroke_gui.setWindowTitle(_translate("text2keystroke", "text2keystroke"))
+        text2keystroke_gui.setWindowTitle(
+            _translate("text2keystroke", "text2keystroke"))
         self.fileModeButton.setText(_translate("text2keystroke", "Open File"))
         self.groupBox.setTitle(_translate("text2keystroke", "History"))
         self.typeButton.setText(_translate("text2keystroke", "Type"))
         self.groupBox_2.setTitle(_translate("text2keystroke", "Text Box"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.TextModeTab), _translate("text2keystroke", "Text Mode"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.ProfileModeTab), _translate("text2keystroke", "Profile Mode"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.TextModeTab), _translate("text2keystroke", "Text Mode"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.ProfileModeTab), _translate("text2keystroke", "Profile Mode"))
         self.statusBar.showMessage('Standby.')
         # self.typeButton.setToolTip('This is an example self.typeButton')
         self.typeButton.clicked.connect(self.type)
         self.wipeButton.clicked.connect(self.textEdit.clear)
         self.listWidget.itemDoubleClicked.connect(self.item_click)
+        self.fileModeButton.clicked.connect(self.read_from_file)
 
     def append_history(self, text):
         '''Append item to history'''
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
-        self.listWidget.addItem('[ {} ]: '.format(time.strftime("%Y-%m-%d %H:%M:%S")) + text)
+        self.listWidget.addItem('[ {} ]: '.format(
+            time.strftime("%Y-%m-%d %H:%M:%S")) + text)
         self.listWidget.setSortingEnabled(__sortingEnabled)
 
     def type(self):
         text = self.textEdit.toPlainText()
-        print(text)
+        # print(text)
         if not text:
             return
         self.textEdit.setEnabled(False)
         self.typeButton.setEnabled(False)
-        self.statusBar.showMessage('Sleeping for {}s...'.format(config.sleepTime))
+        self.statusBar.showMessage(
+            'Sleeping for {}s...'.format(config.sleepTime))
         # time.sleep(config.sleepTime)
         self.statusBar.showMessage('Typing... ' + text)
         # text2keystroke.type_multilines(text)
@@ -121,6 +129,16 @@ class Ui_text2keystroke(object):
     def item_click(self, item):
         self.textEdit.setText(item.text().split(']: ')[1])
 
+    def read_from_file(self):
+        filename, _ = QtWidgets.QFileDialog.getOpenFileName(
+            None, 'Open file', './')
+        if filename:
+            with open(filename) as f:
+                try:
+                    self.textEdit.setText(f.read())
+                except UnicodeDecodeError as e:
+                    QtWidgets.QMessageBox.information(None,"File error","Can not open this text file!", QtWidgets.QMessageBox.Yes)
+
 
 if __name__ == "__main__":
     import sys
@@ -131,4 +149,3 @@ if __name__ == "__main__":
     ui.setupUi(text2keystroke_gui)
     text2keystroke_gui.show()
     sys.exit(app.exec_())
-
