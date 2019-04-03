@@ -77,6 +77,15 @@ class Ui_text2keystroke(object):
         self.statusBar = QtWidgets.QStatusBar(text2keystroke_gui)
         self.statusBar.setObjectName("statusBar")
         text2keystroke_gui.setStatusBar(self.statusBar)
+
+        self.clearListButton = QtWidgets.QPushButton(self.groupBox)
+        self.clearListButton.setGeometry(QtCore.QRect(660, 110, 31, 31))
+        self.clearListButton.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("src/wipe.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.clearListButton.setIcon(icon)
+        self.clearListButton.setObjectName("clearListButton")
+
         self.retranslateUi(text2keystroke_gui)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(text2keystroke_gui)
@@ -99,6 +108,7 @@ class Ui_text2keystroke(object):
         self.wipeButton.clicked.connect(self.textEdit.clear)
         self.listWidget.itemDoubleClicked.connect(self.item_click)
         self.fileModeButton.clicked.connect(self.read_from_file)
+        self.clearListButton.clicked.connect(self.listWidget.clear)
 
     def append_history(self, text):
         '''Append item to history'''
@@ -115,11 +125,13 @@ class Ui_text2keystroke(object):
             return
         self.textEdit.setEnabled(False)
         self.typeButton.setEnabled(False)
-        self.statusBar.showMessage(
-            'Sleeping for {}s...'.format(config.sleepTime))
-        # time.sleep(config.sleepTime)
-        self.statusBar.showMessage('Typing... ' + text)
-        # text2keystroke.type_multilines(text)
+        debug = True
+        if not debug:
+            self.statusBar.showMessage(
+                'Sleeping for {}s...'.format(config.sleepTime))
+            time.sleep(config.sleepTime)
+            self.statusBar.showMessage('Typing... ' + text)
+            text2keystroke.type_multilines(text)
 
         self.statusBar.showMessage('Done!')
         self.textEdit.setEnabled(True)
@@ -137,7 +149,13 @@ class Ui_text2keystroke(object):
                 try:
                     self.textEdit.setText(f.read())
                 except UnicodeDecodeError as e:
-                    QtWidgets.QMessageBox.information(None,"File error","Can not open this text file!", QtWidgets.QMessageBox.Yes)
+                    msgBox = QtWidgets.QMessageBox()
+                    msgBox.setIcon(QtWidgets.QMessageBox.Critical)
+                    msgBox.setWindowTitle('File error')
+                    msgBox.setText("Can not open this text file!")
+                    msgBox.setStandardButtons(QtWidgets.QMessageBox.Retry)
+                    # msgbox.information(None,"File error","Can not open this text file!", QtWidgets.QMessageBox.Yes)
+                    reply = msgBox.exec()
 
 
 if __name__ == "__main__":
