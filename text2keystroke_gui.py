@@ -98,7 +98,7 @@ class Ui_text2keystroke(object):
         '''Append item to history'''
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
-        self.listWidget.addItem(text)
+        self.listWidget.addItem('[ {} ]: '.format(time.strftime("%Y-%m-%d %H:%M:%S")) + text)
         self.listWidget.setSortingEnabled(__sortingEnabled)
 
     def type(self):
@@ -119,7 +119,7 @@ class Ui_text2keystroke(object):
         self.append_history(text)
 
     def item_click(self, item):
-        self.statusBar.showMessage(item.text())
+        self.textEdit.setText(item.text().split(']: ')[1])
 
 
 if __name__ == "__main__":
