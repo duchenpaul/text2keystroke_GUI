@@ -3,6 +3,7 @@ from pynput.keyboard import Key, Controller, Listener
 import time
 import os
 import sys
+import io
 
 import get_clipboard
 import toolkit_config
@@ -57,7 +58,7 @@ def profile_mode():
     return
 
 
-def type_text(text):
+def type_line(text):
     for char in text:
         if char != '\n' and char != '\r\n':
             keyboard.press(char)
@@ -65,10 +66,19 @@ def type_text(text):
             time.sleep(interval)
 
 
+def type_multilines(text):
+    for line in io.StringIO(text).readlines():
+        type_line(line.replace('\n', '').replace(
+            u'\xef\xbb\xbf', u''))
+        keyboard.press(Key.enter)
+        time.sleep(.1)
+
+
 def wait(sleepTime):
-    print('sleep {} seconds...'.format(sleepTime), end = ' ', flush=True)
+    print('sleep {} seconds...'.format(sleepTime), end=' ', flush=True)
     time.sleep(sleepTime)
     print('Typing...')
+
 
 def text_to_keystroke():
     global profileMode
@@ -94,7 +104,8 @@ def text_to_keystroke():
         try:
             with open(file_mode_src_file, 'r') as f:
                 for line in f.readlines():
-                    type_text(line.replace('\n', '').replace(u'\xef\xbb\xbf',u''))
+                    type_line(line.replace('\n', '').replace(
+                        u'\xef\xbb\xbf', u''))
                     keyboard.press(Key.enter)
                     time.sleep(.1)
         except FileNotFoundError as e:
@@ -109,7 +120,7 @@ def text_to_keystroke():
             return
         wait(sleepTime)
         # print(text.strip())
-        type_text(text)
+        type_line(text)
 
 
 def on_release(key):
