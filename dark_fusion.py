@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtGui
 Add to framework.py:
 app.setStyle('Fusion')
 import dark_fusion
-app.setPalette(dark_fusion.palette)
+app.setPalette(dark_fusion.paletteDark)
 '''
 
 palette = QtGui.QPalette()

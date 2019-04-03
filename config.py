@@ -22,8 +22,3 @@ file_mode_src_file = config['FILE_MODE_SRC_FILE']
 
 profile = read_profile(profile)
 
-
-
-print(profile)
-# print([list(i.keys())[0] for i in profile])
-print(query_profile(profile, 'name'))

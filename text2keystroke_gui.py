@@ -108,7 +108,7 @@ class Ui_text2keystroke(object):
         self.fileModeButton.setText(_translate("text2keystroke", "Open File"))
         self.groupBox.setTitle(_translate("text2keystroke", "History"))
         self.typeButton.setText(_translate("text2keystroke", "Type"))
-        self.groupBox_2.setTitle(_translate("text2keystroke", "Text Box"))
+        self.groupBox_2.setTitle(_translate("text2keystroke", " Text Box"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(
             self.TextModeTab), _translate("text2keystroke", "Text Mode"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(
@@ -134,7 +134,7 @@ class Ui_text2keystroke(object):
 
     def type(self):
         text = self.textEdit.toPlainText()
-        print(text)
+        # print(text)
         if not text:
             return
         self.textEdit.setEnabled(False)
@@ -193,6 +193,8 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Fusion')
+    import dark_fusion
+    app.setPalette(dark_fusion.paletteDark)
     text2keystroke_gui = QtWidgets.QMainWindow()
     ui = Ui_text2keystroke()
     ui.setupUi(text2keystroke_gui)
