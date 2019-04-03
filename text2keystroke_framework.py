@@ -6,14 +6,19 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+import text2keystroke
+import time
+
+import config
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_text2keystroke(object):
     def setupUi(self, text2keystroke):
         text2keystroke.setObjectName("text2keystroke")
-        text2keystroke.resize(741, 446)
-        text2keystroke.setMinimumSize(QtCore.QSize(741, 446))
-        text2keystroke.setMaximumSize(QtCore.QSize(741, 446))
+        text2keystroke.resize(741, 465)
+        text2keystroke.setMinimumSize(QtCore.QSize(741, 465))
+        text2keystroke.setMaximumSize(QtCore.QSize(741, 465))
         text2keystroke.setWindowOpacity(1.0)
         text2keystroke.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(text2keystroke)
@@ -58,6 +63,10 @@ class Ui_text2keystroke(object):
         self.ProfileModeTab.setObjectName("ProfileModeTab")
         self.tabWidget.addTab(self.ProfileModeTab, "")
         text2keystroke.setCentralWidget(self.centralwidget)
+        self.statusBar = QtWidgets.QStatusBar(text2keystroke)
+        self.statusBar.setObjectName("statusBar")
+        text2keystroke.setStatusBar(self.statusBar)
+
 
         self.retranslateUi(text2keystroke)
         self.tabWidget.setCurrentIndex(0)
@@ -71,23 +80,37 @@ class Ui_text2keystroke(object):
         self.textBrowser.setHtml(_translate("text2keystroke", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'SimSun\'; font-size:9pt;\"><br /></span></p></body></html>"))
         self.typeButton.setText(_translate("text2keystroke", "Type"))
         self.groupBox_2.setTitle(_translate("text2keystroke", "Text Box"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.TextModeTab), _translate("text2keystroke", "Text Mode"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ProfileModeTab), _translate("text2keystroke", "Profile Mode"))
+        self.statusBar.showMessage('Message in statusbar.')
+        self.typeButton.setToolTip('This is an example self.typeButton')
+        self.typeButton.clicked.connect(self.type)
+
+    def type(self):
+        text = self.textEdit.toPlainText()
+        if not text:
+            return
+        self.textEdit.setEnabled(False)
+        self.typeButton.setEnabled(False)
+        self.statusBar.showMessage('Sleeping for {}s...'.format(config.sleepTime))
+        time.sleep(config.sleepTime)
+        self.statusBar.showMessage('Typing... ' + text)
+        text2keystroke.type_text(text)
+        self.statusBar.showMessage('Done!')
+        self.textEdit.setEnabled(True)
+        self.typeButton.setEnabled(True)        
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle('Fusion')
-    import dark_fusion
-    app.setPalette(dark_fusion.palette)
-    text2keystroke = QtWidgets.QMainWindow()
+    text2keystroke_gui = QtWidgets.QMainWindow()
     ui = Ui_text2keystroke()
-    ui.setupUi(text2keystroke)
-    text2keystroke.show()
+    ui.setupUi(text2keystroke_gui)
+    text2keystroke_gui.show()
     sys.exit(app.exec_())
 
