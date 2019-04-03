@@ -1,9 +1,9 @@
-SET appName=text2keystroke
-pyinstaller --onefile .\%appName%.py 
-move dist\%appName%.exe %cd%
+SET appName=text2keystroke_gui
+pyinstaller .\%appName%.py  --hidden-import PyQt5.sip
+rem move dist\%appName%.exe %cd%
 
-del /s /f /q  text2keystroke.spec
+rem del /s /f /q  text2keystroke.spec
 
-REM walkaround RD bug
-timeout 1
-RD /S /Q   dist\ build\
+rem REM walkaround RD bug
+rem timeout 1
+rem RD /S /Q   dist\ build\
