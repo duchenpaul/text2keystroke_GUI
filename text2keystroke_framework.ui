@@ -201,7 +201,7 @@
      <attribute name="title">
       <string>Profile Mode</string>
      </attribute>
-     <widget class="QListWidget" name="profileList">
+     <widget class="QListWidget" name="profileListWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -261,7 +261,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
      <zorder>groupBox_3</zorder>
-     <zorder>profileList</zorder>
+     <zorder>profileListWidget</zorder>
      <zorder>profileText</zorder>
      <zorder>groupBox_4</zorder>
     </widget>
