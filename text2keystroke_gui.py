@@ -72,6 +72,16 @@ class Ui_text2keystroke(object):
         self.tabWidget.addTab(self.TextModeTab, "")
         self.ProfileModeTab = QtWidgets.QWidget()
         self.ProfileModeTab.setObjectName("ProfileModeTab")
+
+        self.profileListWidget = QtWidgets.QListWidget(self.ProfileModeTab)
+        self.profileListWidget.setGeometry(QtCore.QRect(10, 10, 221, 231))
+        self.profileListWidget.setObjectName("profileList")
+        self.profileText = QtWidgets.QTextBrowser(self.ProfileModeTab)
+        self.profileText.setEnabled(True)
+        self.profileText.setGeometry(QtCore.QRect(240, 10, 311, 231))
+        self.profileText.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.profileText.setObjectName("profileText")
+
         self.tabWidget.addTab(self.ProfileModeTab, "")
         text2keystroke_gui.setCentralWidget(self.centralwidget)
         self.statusBar = QtWidgets.QStatusBar(text2keystroke_gui)
@@ -82,7 +92,8 @@ class Ui_text2keystroke(object):
         self.clearListButton.setGeometry(QtCore.QRect(660, 110, 31, 31))
         self.clearListButton.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("src/wipe.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("src/wipe.svg"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.clearListButton.setIcon(icon)
         self.clearListButton.setObjectName("clearListButton")
 
@@ -109,6 +120,9 @@ class Ui_text2keystroke(object):
         self.listWidget.itemDoubleClicked.connect(self.item_click)
         self.fileModeButton.clicked.connect(self.read_from_file)
         self.clearListButton.clicked.connect(self.listWidget.clear)
+        self.refresh_profile_list()
+        self.profileListWidget.itemClicked.connect(self.profile_click)
+        self.profileListWidget.itemDoubleClicked.connect(self.type_profile)
 
     def append_history(self, text):
         '''Append item to history'''
@@ -120,12 +134,12 @@ class Ui_text2keystroke(object):
 
     def type(self):
         text = self.textEdit.toPlainText()
-        # print(text)
+        print(text)
         if not text:
             return
         self.textEdit.setEnabled(False)
         self.typeButton.setEnabled(False)
-        debug = True
+        debug = False
         if not debug:
             self.statusBar.showMessage(
                 'Sleeping for {}s...'.format(config.sleepTime))
@@ -137,6 +151,7 @@ class Ui_text2keystroke(object):
         self.textEdit.setEnabled(True)
         self.typeButton.setEnabled(True)
         self.append_history(text)
+        self.textEdit.clear()
 
     def item_click(self, item):
         self.textEdit.setText(item.text().split(']: ')[1])
@@ -156,6 +171,22 @@ class Ui_text2keystroke(object):
                     msgBox.setStandardButtons(QtWidgets.QMessageBox.Retry)
                     # msgbox.information(None,"File error","Can not open this text file!", QtWidgets.QMessageBox.Yes)
                     reply = msgBox.exec()
+
+    def refresh_profile_list(self):
+        profile = config.profile
+        self.profileListWidget.addItems([list(i.keys())[0] for i in profile])
+
+    def profile_click(self, item):
+        profile = config.profile
+        # print(item.text())
+        # print(config.query_profile(profile, item.text()))
+        self.profileText.setText(config.query_profile(profile, item.text()))
+
+    def type_profile(self, item):
+        profile = config.profile
+        text = config.query_profile(profile, item.text())
+        self.textEdit.setText(text)
+        self.type()
 
 
 if __name__ == "__main__":

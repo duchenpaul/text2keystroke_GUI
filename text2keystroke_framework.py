@@ -72,6 +72,14 @@ class Ui_text2keystroke(object):
         self.tabWidget.addTab(self.TextModeTab, "")
         self.ProfileModeTab = QtWidgets.QWidget()
         self.ProfileModeTab.setObjectName("ProfileModeTab")
+        self.profileList = QtWidgets.QListWidget(self.ProfileModeTab)
+        self.profileList.setGeometry(QtCore.QRect(10, 10, 221, 231))
+        self.profileList.setObjectName("profileList")
+        self.profileText = QtWidgets.QTextBrowser(self.ProfileModeTab)
+        self.profileText.setEnabled(True)
+        self.profileText.setGeometry(QtCore.QRect(240, 10, 311, 231))
+        self.profileText.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.profileText.setObjectName("profileText")
         self.tabWidget.addTab(self.ProfileModeTab, "")
         text2keystroke.setCentralWidget(self.centralwidget)
         self.statusBar = QtWidgets.QStatusBar(text2keystroke)
@@ -79,7 +87,7 @@ class Ui_text2keystroke(object):
         text2keystroke.setStatusBar(self.statusBar)
 
         self.retranslateUi(text2keystroke)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(text2keystroke)
 
     def retranslateUi(self, text2keystroke):
@@ -97,6 +105,11 @@ class Ui_text2keystroke(object):
         self.typeButton.setText(_translate("text2keystroke", "Type"))
         self.groupBox_2.setTitle(_translate("text2keystroke", "Text Box"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.TextModeTab), _translate("text2keystroke", "Text Mode"))
+        self.profileText.setHtml(_translate("text2keystroke", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">021131</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ProfileModeTab), _translate("text2keystroke", "Profile Mode"))
 
 

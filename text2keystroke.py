@@ -138,7 +138,7 @@ def on_release(key):
         wait(sleepTime)
         print('Type {}'.format(configDict[func_key]))
         # keyboard.type(keyList[func_key])
-        type_text(configDict[func_key])
+        type_line(configDict[func_key])
     else:
         print('{} is not defined in config'.format(func_key))
         # print(func_key)
@@ -171,7 +171,9 @@ maxWordCount = int(config['MAX_TEXT_COUNT'])
 file_mode_src_file = config['FILE_MODE_SRC_FILE']
 
 if __name__ == '__main__':
-    endless_run()   # Endless run
+    _ = print_config(printFlag=None)
+    print(_)
+    # endless_run()   # Endless run
     # text_to_keystroke()  # Run once
     # print(keyList)
     # on_release('4')
