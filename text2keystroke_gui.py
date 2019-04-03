@@ -87,10 +87,8 @@ class Ui_text2keystroke(object):
         self.groupBox_4 = QtWidgets.QGroupBox(self.ProfileModeTab)
         self.groupBox_4.setGeometry(QtCore.QRect(240, 0, 311, 241))
         self.groupBox_4.setObjectName("groupBox_4")
-        self.groupBox_3.raise_()
         self.profileListWidget.raise_()
         self.profileText.raise_()
-        self.groupBox_4.raise_()
 
         self.tabWidget.addTab(self.ProfileModeTab, "")
         text2keystroke_gui.setCentralWidget(self.centralwidget)

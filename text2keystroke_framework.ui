@@ -260,10 +260,10 @@ p, li { white-space: pre-wrap; }
        <string>Text</string>
       </property>
      </widget>
-     <zorder>groupBox_3</zorder>
-     <zorder>profileListWidget</zorder>
-     <zorder>profileText</zorder>
      <zorder>groupBox_4</zorder>
+     <zorder>groupBox_3</zorder>
+     <zorder>profileText</zorder>
+     <zorder>profileListWidget</zorder>
     </widget>
    </widget>
   </widget>

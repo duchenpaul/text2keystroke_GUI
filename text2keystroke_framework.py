@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'text2keystroke_framework.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_text2keystroke(object):
@@ -86,10 +80,10 @@ class Ui_text2keystroke(object):
         self.groupBox_4 = QtWidgets.QGroupBox(self.ProfileModeTab)
         self.groupBox_4.setGeometry(QtCore.QRect(240, 0, 311, 241))
         self.groupBox_4.setObjectName("groupBox_4")
-        self.groupBox_3.raise_()
-        self.profileListWidget.raise_()
-        self.profileText.raise_()
         self.groupBox_4.raise_()
+        self.groupBox_3.raise_()
+        self.profileText.raise_()
+        self.profileListWidget.raise_()
         self.tabWidget.addTab(self.ProfileModeTab, "")
         text2keystroke.setCentralWidget(self.centralwidget)
         self.statusBar = QtWidgets.QStatusBar(text2keystroke)
