@@ -6,10 +6,10 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+import config
 import text2keystroke
 import time
 
-import config
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -113,6 +113,7 @@ class Ui_text2keystroke(object):
         _translate = QtCore.QCoreApplication.translate
         text2keystroke_gui.setWindowTitle(
             _translate("text2keystroke", "text2keystroke"))
+        text2keystroke_gui.setWindowIcon(QtGui.QIcon('src/icon.png'))
         self.fileModeButton.setText(_translate("text2keystroke", "Open File"))
         self.groupBox.setTitle(_translate("text2keystroke", "History"))
         self.typeButton.setText(_translate("text2keystroke", "Type"))
@@ -201,7 +202,7 @@ class Ui_text2keystroke(object):
     def type_profile(self, item):
         profile = config.profile
         text = config.query_profile(profile, item.text())
-        self.textEdit.setText(text)
+        self.textEdit.setPlainText(text)
         self.type()
 
 
