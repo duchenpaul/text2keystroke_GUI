@@ -203,7 +203,6 @@ class Ui_text2keystroke(object):
         profile = config.profile
         text = config.query_profile(profile, item.text())
         self.textEdit.setPlainText(text)
-        self.type()
 
 
 if __name__ == "__main__":
