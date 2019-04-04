@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+# Form implementation generated from reading ui file 'text2keystroke_framework.ui'
+#
+# Created by: PyQt5 UI code generator 5.11.3
+#
+# WARNING! All changes made in this file will be lost!
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_text2keystroke(object):
@@ -55,9 +61,9 @@ class Ui_text2keystroke(object):
         self.groupBox_2 = QtWidgets.QGroupBox(self.TextModeTab)
         self.groupBox_2.setGeometry(QtCore.QRect(0, 10, 561, 231))
         self.groupBox_2.setObjectName("groupBox_2")
-        self.textEdit = QtWidgets.QTextEdit(self.groupBox_2)
-        self.textEdit.setGeometry(QtCore.QRect(10, 20, 541, 201))
-        self.textEdit.setObjectName("textEdit")
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(self.groupBox_2)
+        self.plainTextEdit.setGeometry(QtCore.QRect(10, 20, 541, 201))
+        self.plainTextEdit.setObjectName("plainTextEdit")
         self.pushButton = QtWidgets.QPushButton(self.groupBox_2)
         self.pushButton.setGeometry(QtCore.QRect(520, 190, 31, 31))
         self.pushButton.setText("")
@@ -91,7 +97,7 @@ class Ui_text2keystroke(object):
         text2keystroke.setStatusBar(self.statusBar)
 
         self.retranslateUi(text2keystroke)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(text2keystroke)
 
     def retranslateUi(self, text2keystroke):
@@ -112,8 +118,8 @@ class Ui_text2keystroke(object):
         self.profileText.setHtml(_translate("text2keystroke", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">021131</p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'SimSun\'; font-size:9pt;\">021131</span></p></body></html>"))
         self.groupBox_3.setTitle(_translate("text2keystroke", "Profile"))
         self.groupBox_4.setTitle(_translate("text2keystroke", "Text"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.ProfileModeTab), _translate("text2keystroke", "Profile Mode"))
