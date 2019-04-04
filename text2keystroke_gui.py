@@ -133,6 +133,11 @@ class Ui_text2keystroke(object):
         self.refresh_profile_list()
         self.profileListWidget.itemClicked.connect(self.profile_click)
         self.profileListWidget.itemDoubleClicked.connect(self.type_profile)
+        self.shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+O"), self.fileModeButton)
+        self.shortcut.activated.connect(self.read_from_file)
+        self.shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+T"), self.typeButton)
+        self.shortcut.activated.connect(self.type)
+        
 
     def append_history(self, text):
         '''Append item to history'''
@@ -141,6 +146,7 @@ class Ui_text2keystroke(object):
         self.listWidget.addItem('[ {} ]: '.format(
             time.strftime("%Y-%m-%d %H:%M:%S")) + text)
         self.listWidget.setSortingEnabled(__sortingEnabled)
+        self.listWidget.sortItems(QtCore.Qt.DescendingOrder)
 
     def type(self):
         text = self.textEdit.toPlainText()
@@ -149,7 +155,7 @@ class Ui_text2keystroke(object):
             return
         self.textEdit.setEnabled(False)
         self.typeButton.setEnabled(False)
-        debug = False
+        debug = True
         if not debug:
             self.statusBar.showMessage(
                 'Sleeping for {}s...'.format(config.sleepTime))
