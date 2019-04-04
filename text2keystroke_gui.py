@@ -58,7 +58,7 @@ class Ui_text2keystroke(object):
         self.groupBox_2 = QtWidgets.QGroupBox(self.TextModeTab)
         self.groupBox_2.setGeometry(QtCore.QRect(0, 10, 561, 231))
         self.groupBox_2.setObjectName("groupBox_2")
-        self.textEdit = QtWidgets.QTextEdit(self.groupBox_2)
+        self.textEdit = QtWidgets.QPlainTextEdit(self.groupBox_2)
         self.textEdit.setGeometry(QtCore.QRect(10, 20, 541, 201))
         self.textEdit.setObjectName("textEdit")
         self.wipeButton = QtWidgets.QPushButton(self.groupBox_2)
@@ -170,7 +170,7 @@ class Ui_text2keystroke(object):
         self.textEdit.clear()
 
     def item_click(self, item):
-        self.textEdit.setText(item.text().split(']: ')[1])
+        self.textEdit.setPlainText(item.text().split(']: ')[1])
 
     def read_from_file(self):
         filename, _ = QtWidgets.QFileDialog.getOpenFileName(
