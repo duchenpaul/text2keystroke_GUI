@@ -179,7 +179,7 @@ class Ui_text2keystroke(object):
         if filename:
             with open(filename) as f:
                 try:
-                    self.textEdit.setText(f.read())
+                    self.textEdit.setPlainText(f.read())
                 except UnicodeDecodeError as e:
                     msgBox = QtWidgets.QMessageBox()
                     msgBox.setIcon(QtWidgets.QMessageBox.Critical)
