@@ -1,7 +1,5 @@
 import toolkit_config
 
-config, profile = toolkit_config.read_config()
-
 def read_profile(profile):
     configDictList = []
     for k, v in profile.items():
@@ -15,10 +13,24 @@ def query_profile(profile, key):
             if k == key:
                 return v
 
-sleepTime = float(config['SLEEP_TIME'])
-interval = float(config['KEY_PRESS_INTERVAL'])
-maxWordCount = int(config['MAX_TEXT_COUNT'])
-file_mode_src_file = config['FILE_MODE_SRC_FILE']
 
-profile = read_profile(profile)
+try:
+    config, profile = toolkit_config.read_config()
+    sleepTime = float(config['SLEEP_TIME'])
+    interval = float(config['KEY_PRESS_INTERVAL'])
+    maxWordCount = int(config['MAX_TEXT_COUNT'])
+    file_mode_src_file = config['FILE_MODE_SRC_FILE']
+
+    profile = read_profile(profile)
+except Exception as e:
+    with open('config_sample.ini') as f, open('config.ini', 'w') as conf:
+        tmpl = f.read()
+        conf.write(tmpl)
+    config, profile = toolkit_config.read_config()
+    sleepTime = float(config['SLEEP_TIME'])
+    interval = float(config['KEY_PRESS_INTERVAL'])
+    maxWordCount = int(config['MAX_TEXT_COUNT'])
+    file_mode_src_file = config['FILE_MODE_SRC_FILE']
+
+    profile = read_profile(profile)
 
