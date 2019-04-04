@@ -13,7 +13,7 @@
 
 build/
 dist/
-*.spec
+# *.spec
 
 **/*.exe
 **/*.bak
