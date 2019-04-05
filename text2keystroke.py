@@ -67,11 +67,16 @@ def type_line(text):
 
 
 def type_multilines(text):
-    for line in io.StringIO(text).readlines():
+    readlines = io.StringIO(text).readlines()
+    lineNumberTotal = len(readlines)
+    lineNumber = 0
+    for line in readlines:
+        lineNumber += 1
         type_line(line.replace('\n', '').replace(
             u'\xef\xbb\xbf', u''))
-        keyboard.press(Key.enter)
-        time.sleep(.1)
+        if lineNumber < lineNumberTotal:
+            keyboard.press(Key.enter)
+            time.sleep(.1)
 
 
 def wait(sleepTime):
