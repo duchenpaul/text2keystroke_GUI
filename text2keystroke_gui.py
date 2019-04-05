@@ -185,7 +185,7 @@ class Ui_text2keystroke(object):
                     msgBox.setIcon(QtWidgets.QMessageBox.Critical)
                     msgBox.setWindowTitle('File error')
                     msgBox.setText("Can not open this text file!")
-                    msgBox.setStandardButtons(QtWidgets.QMessageBox.Retry)
+                    msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
                     # msgbox.information(None,"File error","Can not open this text file!", QtWidgets.QMessageBox.Yes)
                     reply = msgBox.exec()
 
