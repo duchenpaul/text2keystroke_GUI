@@ -164,12 +164,12 @@ class Ui_text2keystroke(object):
             self.statusBar.showMessage('Typing... ' + text)
             text2keystroke.type_multilines(text)
 
-        text2keystroke.flash_caps_lock_light()
         self.statusBar.showMessage('Done!')
         self.textEdit.setEnabled(True)
         self.typeButton.setEnabled(True)
         self.append_history(text)
         self.textEdit.clear()
+        text2keystroke.flash_caps_lock_light()
 
     def item_click(self, item):
         self.textEdit.setPlainText(item.text().split(']: ')[1])
