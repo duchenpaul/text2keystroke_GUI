@@ -10,7 +10,7 @@ config_file = os.path.dirname(os.path.realpath(__file__)) + os.sep + 'config.ini
 def read_config():
 	try:
 		print('Read config file: ' + config_file )
-		configRead = configparser.ConfigParser()
+		configRead = configparser.RawConfigParser()
 		configRead.read("config.ini")
 
 		config = {}
