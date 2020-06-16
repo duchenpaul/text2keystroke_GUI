@@ -1,2 +1,4 @@
 pynput
 PyQt5
+pywin32
+pyinstaller
